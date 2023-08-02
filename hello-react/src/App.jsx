@@ -19,7 +19,7 @@ function App() {
 
         </div>
         <div className="border rounded overflow-hidden shadow-lg p-4">
-          <h1 className="text-2xl font-bold text-center text-gray-600 pb-5">Completed</h1>
+          <h1 className="text-2xl font-bold text-center text-gray-600 pb-5">Done</h1>
           <TaskCard title="Go to Music Club" isCompleted="1" date="12th April" assignee="Kaung" />
           <TaskCard title="Get approval from principal" isCompleted="1" date="10th April" assignee="Demonhan" />
         </div>
