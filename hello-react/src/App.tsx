@@ -43,8 +43,8 @@ function App() {
       <div className="grid grid-cols-2 gap-6">
         <div className="border rounded overflow-hidden shadow-lg p-4">
           <h1 className="text-2xl font-bold text-center text-gray-600 pb-5">Pending</h1>
-          <TaskCard title={task1.title} isCompleted={task1.isCompleted} date={task1.date} assignee={task1.assignee} />
-          <TaskCard title={task2.title} isCompleted={task2.isCompleted} date={task2.date} assignee={task2.assignee} />
+          <TaskCard title={task1.title} isCompleted={task1.isCompleted} dueDate={task1.date} assigneeName={task1.assignee} />
+          <TaskCard title={task2.title} isCompleted={task2.isCompleted} dueDate={task2.date} assigneeName={task2.assignee} />
           <div className="mx-3 mb-4">
             <button className="bg-gray-200 hover:bg-gray-300 text-gray-600  font-bold py-2 px-4 rounded w-full">
               + New Task
@@ -54,8 +54,8 @@ function App() {
         </div>
         <div className="border rounded overflow-hidden shadow-lg p-4">
           <h1 className="text-2xl font-bold text-center text-gray-600 pb-5">Done</h1>
-          <TaskCard title={task3.title} isCompleted={task3.isCompleted} date={task3.date} assignee={task3.assignee} />
-          <TaskCard title={task4.title} isCompleted={task4.isCompleted} date={task4.date} assignee={task4.assignee} />
+          <TaskCard title={task3.title} isCompleted={task3.isCompleted} completedAtDate={task3.date} assigneeName={task3.assignee} />
+          <TaskCard title={task4.title} isCompleted={task4.isCompleted} completedAtDate={task4.date} assigneeName={task4.assignee} />
         </div>
       </div>
 
