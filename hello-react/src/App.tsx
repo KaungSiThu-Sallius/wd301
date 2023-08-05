@@ -43,8 +43,8 @@ function App() {
       <div className="grid grid-cols-2 gap-6">
         <div className="border rounded overflow-hidden shadow-lg p-4">
           <h1 className="text-2xl font-bold text-center text-gray-600 pb-5">Pending</h1>
-          <TaskCard title={task1.title} isCompleted={task1.isCompleted} assigneeName={task1.assignee} dueDate={task1.date}/>
-          <TaskCard title={task2.title} isCompleted={task2.isCompleted} assigneeName={task2.assignee} dueDate={task2.date}/>
+          <TaskCard dueDate={task1.date} title={task1.title} completedAtDate={task1.date} isCompleted={task1.isCompleted} assigneeName={task1.assignee} />
+          <TaskCard dueDate={task2.date} title={task2.title} completedAtDate={task2.date}  isCompleted={task2.isCompleted} assigneeName={task2.assignee} />
           <div className="mx-3 mb-4">
             <button className="bg-gray-200 hover:bg-gray-300 text-gray-600  font-bold py-2 px-4 rounded w-full">
               + New Task
