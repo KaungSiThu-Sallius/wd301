@@ -19,7 +19,7 @@ function App() {
   const task2:taskData={
     title: "Create Blog",
     isCompleted: "0",
-    date: "10th April",
+    date: "12th April",
     assignee: "Hein",
   }
 
