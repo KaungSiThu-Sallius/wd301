@@ -5,7 +5,7 @@ import './TaskCard.css';
 const TaskCard = (props) => {
   let isCompleted = "";
   let date="";
-  if (props.isCompleted == "0") {
+  if (props.dueDate) {
     isCompleted = "Due on";
     date = props.dueDate;
   } else {
