@@ -15,6 +15,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         this.state = {
             title: ""
         }
+
     }
     addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
