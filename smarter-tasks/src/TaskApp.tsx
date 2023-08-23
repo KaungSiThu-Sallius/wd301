@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect } from "react";
+
 import { TaskItem } from "./types";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
-interface TaskAppProp { }
+
 interface TaskAppState {
     tasks: TaskItem[];
 }
 
-const TaskApp = (props: TaskAppProp) => {
+const TaskApp = () => {
     const [taskAppState, setTaskAppState] = useLocalStorage<TaskAppState>("tasks", {
         tasks: [],
     });
