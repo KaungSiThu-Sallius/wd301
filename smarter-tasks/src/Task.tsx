@@ -11,7 +11,7 @@ interface TaskProp {
 
 const Task = (props: TaskProp) => {
 
-  const deleteTask = () => {
+  const deleteTaskButton = () => {
     props.onDelete();
   }
 
@@ -24,7 +24,7 @@ const Task = (props: TaskProp) => {
           <p className="text-sm text-slate-500">Description: {props.description}</p>
         </div>
         <div>
-          <button onClick={deleteTask} className="deleteTaskButton bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+          <button onClick={deleteTaskButton} className="deleteTaskButton bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
         </div>
       </div>
 
