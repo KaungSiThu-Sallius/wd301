@@ -22,6 +22,10 @@ const router = createBrowserRouter([
     element: <Signin />,
   },
   {
+    path: '*',
+    element: <NotFound />
+  },
+  {
     element: (
       <ProtectedRoute>
         <Layout />
@@ -40,12 +44,10 @@ const router = createBrowserRouter([
         path: "tasks/:id",
         element: <TaskDetailsPage />,
       },
+
     ],
   },
-  {
-    path: '*',
-    element: <NotFound />
-  }
+
 ]);
 
 const App = () => {
