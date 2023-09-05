@@ -40,7 +40,7 @@ const TaskApp = () => {
                     <h1 className="text-slate-500 text-xl font-bold text-center mb-2">
                         Pending
                     </h1>
-                    <TaskForm addTask={addTask} />
+                    <TaskForm tasks={taskAppState.tasks} addTask={addTask} />
                     <TaskList tasks={taskAppState.tasks} onDeleteTask={deleteTask} />
                 </div>
             </div>

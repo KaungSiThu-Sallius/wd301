@@ -1,34 +1,33 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import "./TaskCard.css";
 
-import './TaskCard.css';
+//import { TaskItem } from "./types";
 
-interface TaskProp {
+interface TaskItem {
+  id: number;
   title: string;
   description: string;
   dueDate: string;
-  onDelete: () => void;
+  onDelete: (titleid: number) => void;
 }
-
-const Task = (props: TaskProp) => {
-
-  const deleteTaskButton = () => {
-    props.onDelete();
-  }
-
+const Task = (props: TaskItem) => {
   return (
-    <li className="TaskItem shadow-md border border-slate-100">
-      <div className="grid grid-cols-3">
-        <div className="col-span-2">
+    <div className="TaskItem shadow-md border border-slate-100">
+      <li>
+        <a href={`/tasks/${props.id || ""}`}>
           <h2 className="text-base font-bold my-1">{props.title}</h2>
-          <p className="text-sm text-slate-500">{props.dueDate}</p>
-          <p className="text-sm text-slate-500">Description: {props.description}</p>
-        </div>
-        <div>
-          <button onClick={deleteTaskButton} className="deleteTaskButton bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
-        </div>
-      </div>
-
-    </li>
+        </a>
+        <p className="text-sm text-slate-500">Due Date: {props.dueDate}</p>
+        <p className="text-sm text-slate-500">
+          Description: {props.description}
+        </p>
+        <button
+          className="deleteTaskButton"
+          onClick={() => props.onDelete(props.id)}
+        >
+          Delete
+        </button>
+      </li>
+    </div>
   );
 };
 
