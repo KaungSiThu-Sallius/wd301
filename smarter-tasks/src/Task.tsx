@@ -1,32 +1,31 @@
 import "./TaskCard.css";
+import { TaskItem } from "./types";
 
-//import { TaskItem } from "./types";
-
-interface TaskItem {
-  id: number;
-  title: string;
-  description: string;
-  dueDate: string;
-  onDelete: (titleid: number) => void;
+interface TaskProps {
+  item: TaskItem;
+  onDelete: (task: TaskItem) => void;
 }
-const Task = (props: TaskItem) => {
+
+const Task = (props: TaskProps) => {
+  const { item, onDelete } = props;
   return (
     <div className="TaskItem shadow-md border border-slate-100">
-      <li>
-        <a href={`/tasks/${props.id || ""}`}>
-          <h2 className="text-base font-bold my-1">{props.title}</h2>
-        </a>
-        <p className="text-sm text-slate-500">Due Date: {props.dueDate}</p>
-        <p className="text-sm text-slate-500">
-          Description: {props.description}
-        </p>
-        <button
-          className="deleteTaskButton"
-          onClick={() => props.onDelete(props.id)}
-        >
-          Delete
+      <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+        <div>
+          <a href={`/tasks/${item.id || ""}`}>
+            <h2 className="text-base font-bold my-1">{item.title}</h2>
+          </a>
+          <p className="text-sm text-slate-500">{item.dueDate}</p>
+          <p className="text-sm text-slate-500">
+            Description: {item.description}
+          </p>
+        </div>
+
+        <button className="deleteTaskButton cursor-pointer flex items-center justify-center h-4 w-4 rounded-full my-5 mr-5"
+          onClick={() => onDelete(item)}>
+          X
         </button>
-      </li>
+      </div>
     </div>
   );
 };
