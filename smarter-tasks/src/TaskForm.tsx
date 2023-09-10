@@ -34,8 +34,7 @@ const TaskForm = (props: TaskFormProps) => {
         if (formState.title.length === 0 || formState.dueDate.length === 0) {
             return;
         }
-        props.addTask(formState);
-        setFormState({ id: props.tasks[props.tasks.length - 1].id + 2, title: "", description: "", dueDate: "" });
+        setFormState({ id: props.tasks[props.tasks.length - 1]?.id + 2, title: "", description: "", dueDate: "" });
     };
 
 
