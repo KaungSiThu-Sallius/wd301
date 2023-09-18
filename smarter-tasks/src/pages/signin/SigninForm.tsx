@@ -4,9 +4,11 @@ import { API_ENDPOINT } from '../../config/constants';
 import { useNavigate } from "react-router-dom";
 
 const SigninForm: React.FC = () => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    localStorage.setItem('authToken', "");
 
     // Then we will define the handle submit function
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,14 +25,15 @@ const SigninForm: React.FC = () => {
             }
 
             console.log('Sign-in successful');
-            navigate("/dashboard");
+
             // extract the response body as JSON data
             const data = await response.json();
+
 
             // After successful signin, first we will save the token in localStorage
             localStorage.setItem('authToken', data.token);
             localStorage.setItem('userData', JSON.stringify(data.user));
-
+            navigate("/dashboard");
 
 
         } catch (error) {
