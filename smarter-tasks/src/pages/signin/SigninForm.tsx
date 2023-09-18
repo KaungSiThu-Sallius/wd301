@@ -9,6 +9,7 @@ const SigninForm: React.FC = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     localStorage.setItem('authToken', "");
+    localStorage.setItem('userData', "");
 
     // Then we will define the handle submit function
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

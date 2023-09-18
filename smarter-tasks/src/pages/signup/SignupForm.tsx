@@ -7,6 +7,7 @@ const SignupForm: React.FC = () => {
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
     localStorage.setItem('authToken', "");
+    localStorage.setItem('userData', "");
     const navigate = useNavigate();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
