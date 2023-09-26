@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
-import { deleteMember } from '../../context/members/action';
+import { deleteMember } from '../../context/members/actions';
 import { useMembersState, useMembersDispatch } from "../../context/members/context";
 
 export default function MemberListItems() {
