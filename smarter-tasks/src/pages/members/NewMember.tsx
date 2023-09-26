@@ -84,6 +84,7 @@ const NewProject = () => {
                                                 <span>{error}</span>
                                             }
                                             <input
+                                                id='name'
                                                 type="text"
                                                 placeholder='Enter member name...'
                                                 autoFocus
@@ -93,6 +94,7 @@ const NewProject = () => {
                                             />
                                             {errors.name && <span>This field is required</span>}
                                             <input
+                                                id='email'
                                                 type="email"
                                                 placeholder='Enter email...'
                                                 autoFocus
@@ -102,6 +104,7 @@ const NewProject = () => {
                                             />
                                             {errors.email && <span>This field is required</span>}
                                             <input
+                                                id='password'
                                                 type="password"
                                                 placeholder='Enter password...'
                                                 autoFocus
