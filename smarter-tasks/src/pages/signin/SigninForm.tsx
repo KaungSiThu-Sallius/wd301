@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 // First we will import the API_ENDPOINT constant from the `config` folder
 import { API_ENDPOINT } from '../../config/constants';
 import { useNavigate } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form"
 
+type Inputs = {
+    email: string
+    password: string
+}
 const SigninForm: React.FC = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>()
+
     localStorage.setItem('authToken', "");
     localStorage.setItem('userData', "");
 
     // Then we will define the handle submit function
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        const { email, password } = data
         try {
             const response = await fetch(`${API_ENDPOINT}/users/sign_in`, {
                 method: 'POST',
@@ -28,12 +38,12 @@ const SigninForm: React.FC = () => {
             console.log('Sign-in successful');
 
             // extract the response body as JSON data
-            const data = await response.json();
+            const _data = await response.json();
 
 
             // After successful signin, first we will save the token in localStorage
-            localStorage.setItem('authToken', data.token);
-            localStorage.setItem('userData', JSON.stringify(data.user));
+            localStorage.setItem('authToken', _data.token);
+            localStorage.setItem('userData', JSON.stringify(_data.user));
             navigate("/account");
 
 
@@ -43,14 +53,16 @@ const SigninForm: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <label className="block text-gray-700 font-semibold mb-2">Email:</label>
-                <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue" />
+                <input {...register("email", { required: true })} type="email" name="email" id="email" className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue" />
+                {errors.email && <span>This field is required</span>}
             </div>
             <div>
                 <label className="block text-gray-700 font-semibold mb-2">Password:</label>
-                <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue" />
+                <input {...register("password", { required: true })} type="password" name="password" id="password" className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue" />
+                {errors.password && <span>This field is required</span>}
             </div>
             <button type="submit" className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4">Sign In</button>
         </form>
