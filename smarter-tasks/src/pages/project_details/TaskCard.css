@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.TaskItem {
+  padding: 6px 8px;
+  margin-bottom: 6px;
+}
