@@ -6,18 +6,21 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useTasksDispatch, useTasksState } from "../../context/task/context";
 import { useCommentsDispatch, useCommentsState } from "../../context/comment/context";
 import { updateTask } from "../../context/task/actions";
+import { addComment } from "../../context/comment/actions";
 
 import { useProjectsState } from "../../context/projects/context";
 import { TaskDetailsPayload } from "../../context/task/types";
+import { CommentDetailsPayload } from "../../context/comment/types";
 import { Dialog, Transition, Listbox } from "@headlessui/react";
 import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import { useMembersState } from "../../context/members/context";
 import { refreshComments } from "../../context/comment/actions";
 
+
+
 type TaskFormUpdatePayload = TaskDetailsPayload & {
     selectedPerson: string;
 };
-
 
 // Helper function to format the date to YYYY-MM-DD format
 const formatDateForPicker = (isoDate: string) => {
@@ -65,9 +68,9 @@ const TaskDetails = () => {
     );
     // Use react-form-hook to manage the form. Initialize with data from selectedTask.
     const {
-        register,
-        handleSubmit,
-        formState: { errors },
+        register: taskFormRegister,
+        handleSubmit: taskFormSubmit,
+        formState: { errors: taskFormErrors },
     } = useForm<TaskFormUpdatePayload>({
         defaultValues: {
             title: selectedTask.title,
@@ -76,6 +79,12 @@ const TaskDetails = () => {
             dueDate: formatDateForPicker(selectedTask.dueDate),
         },
     });
+
+    const {
+        register: commentFormRegister,
+        handleSubmit: commentFormSubmit,
+        formState: { errors: commentFormErrors },
+    } = useForm<CommentDetailsPayload>();
 
     if (!selectedProject) {
         return <>No such Project!</>;
@@ -95,6 +104,14 @@ const TaskDetails = () => {
             ...selectedTask,
             ...data,
             assignee: assignee?.id,
+        });
+        closeModal();
+    };
+
+
+    const onSubmit2: SubmitHandler<CommentDetailsPayload> = async (data) => {
+        addComment(commentDispatch, projectID ?? "", taskID ?? "", {
+            ...data
         });
         closeModal();
     };
@@ -134,13 +151,13 @@ const TaskDetails = () => {
                                         Task Details
                                     </Dialog.Title>
                                     <div className="mt-2">
-                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                        <form onSubmit={taskFormSubmit(onSubmit)}>
                                             <input
                                                 type="text"
                                                 required
                                                 placeholder="Enter title"
                                                 id="title"
-                                                {...register("title", { required: true })}
+                                                {...taskFormRegister("title", { required: true })}
                                                 className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                                             />
                                             <input
@@ -148,7 +165,7 @@ const TaskDetails = () => {
                                                 required
                                                 placeholder="Enter description"
                                                 id="description"
-                                                {...register("description", { required: true })}
+                                                {...taskFormRegister("description", { required: true })}
                                                 className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                                             />
                                             <input
@@ -156,7 +173,7 @@ const TaskDetails = () => {
                                                 required
                                                 placeholder="Enter due date"
                                                 id="dueDate"
-                                                {...register("dueDate", { required: true })}
+                                                {...taskFormRegister("dueDate", { required: true })}
                                                 className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                                             />
                                             <h3><strong>Assignee</strong></h3>
@@ -221,7 +238,26 @@ const TaskDetails = () => {
                                                 {commentData?.map((comment) => (
                                                     <p key={comment.id} className="comment">{comment.description}</p>
                                                 ))}
+                                                <div className="addCommentSection" id="commentBox">
+                                                    <form onSubmit={commentFormSubmit(onSubmit2)}>
+                                                        <input
+                                                            type="text"
+                                                            required
+                                                            placeholder="Enter Comment"
+                                                            id="description"
+                                                            {...commentFormRegister("description", { required: true })}
+                                                            className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+                                                        />
 
+                                                        <button
+                                                            type="submit"
+                                                            id="addCommentBtn"
+                                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                                        >
+                                                            Add Comment
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
 
                                         </div>

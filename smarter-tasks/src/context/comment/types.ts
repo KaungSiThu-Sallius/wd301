@@ -43,8 +43,7 @@ export type CommentsDispatch = React.Dispatch<CommentActions>;
 //   taskId: number;
 //   owner: number;
 // };
-
-// export type TaskDetailsPayload = Omit<TaskDetails, "id" | "assignee" | "state">;
+export type CommentDetailsPayload = Omit<CommentDetails, "id">;
 
 // export type Comments = {
 //   [k: string]: CommentDetails;
@@ -53,8 +52,6 @@ export type CommentsDispatch = React.Dispatch<CommentActions>;
 export type CommentDetails = {
   id: number;
   description: string;
-  task_id: number;
-  owner: number;
 };
 
 export type CommentData = CommentDetails[];

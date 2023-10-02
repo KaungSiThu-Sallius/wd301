@@ -1,7 +1,7 @@
 // Import required type annotations
 import { API_ENDPOINT } from "../../config/constants";
 import {
-  CommentDetails,
+  CommentDetailsPayload,
   CommentListAvailableAction,
   CommentsDispatch,
   CommentData
@@ -14,7 +14,7 @@ export const addComment = async (
   dispatch: CommentsDispatch,
   projectID: string,
   taskID: string,
-  comment: CommentDetails
+  comment: CommentDetailsPayload
 ) => {
   const token = localStorage.getItem("authToken") ?? "";
   try {
