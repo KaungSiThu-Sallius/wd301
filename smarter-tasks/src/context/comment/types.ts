@@ -49,10 +49,18 @@ export type CommentDetailsPayload = Omit<CommentDetails, "id">;
 //   [k: string]: CommentDetails;
 // };
 
+export type User = {
+  name: string;  
+  email: string;
+  id: number;
+}
+
 export type CommentDetails = {
+  User: User;
   id: number;
   description: string;
-    updated_at: string;
+  updatedAt: string;
+  owner: number;
 };
 
 export type CommentData = CommentDetails[];

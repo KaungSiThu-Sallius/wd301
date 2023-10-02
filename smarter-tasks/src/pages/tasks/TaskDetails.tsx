@@ -15,6 +15,7 @@ import { Dialog, Transition, Listbox } from "@headlessui/react";
 import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import { useMembersState } from "../../context/members/context";
 import { refreshComments } from "../../context/comment/actions";
+import moment from 'moment';
 
 
 
@@ -66,6 +67,8 @@ const TaskDetails = () => {
     const [selectedPerson, setSelectedPerson] = useState(
         selectedTask.assignedUserName ?? ""
     );
+
+
     // Use react-form-hook to manage the form. Initialize with data from selectedTask.
     const {
         register: taskFormRegister,
@@ -79,6 +82,8 @@ const TaskDetails = () => {
             dueDate: formatDateForPicker(selectedTask.dueDate),
         },
     });
+
+
 
     const {
         register: commentFormRegister,
@@ -111,10 +116,12 @@ const TaskDetails = () => {
 
     const onSubmit2: SubmitHandler<CommentDetailsPayload> = async (data) => {
         addComment(commentDispatch, projectID ?? "", taskID ?? "", {
+
             ...data
         });
         closeModal();
     };
+
 
     return (
         <>
@@ -235,11 +242,17 @@ const TaskDetails = () => {
                                         <div className="mt-2">
                                             <h3><strong>Comments</strong></h3>
                                             <div className="mt-2">
+
                                                 {commentData
-                                                    ?.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+                                                    ?.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
                                                     .map((comment) => (
                                                         <p key={comment.id} className="comment">
-                                                            {comment.description}
+                                                            <span>Name: {comment.User.name}</span>
+                                                            <br />
+                                                            <span>Comment: {comment.description}</span>
+                                                            <br />
+                                                            <span>{moment(comment.updatedAt).format('MMMM D, YYYY h:mm A')}</span>
+                                                            <br /><br />
                                                         </p>
                                                     ))}
                                                 <div className="addCommentSection" id="commentBox">
@@ -253,6 +266,14 @@ const TaskDetails = () => {
                                                             className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                                                         />
 
+                                                        <input
+                                                            type="hidden"
+
+                                                            value={moment().format('YYYY-MM-DDTHH:mm:ssZ')}
+                                                            id="updatedAt"
+                                                            {...commentFormRegister("updatedAt", { required: true })}
+
+                                                        />
                                                         <button
                                                             type="submit"
                                                             id="addCommentBtn"

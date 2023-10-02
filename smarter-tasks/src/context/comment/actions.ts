@@ -18,6 +18,8 @@ export const addComment = async (
 ) => {
   const token = localStorage.getItem("authToken") ?? "";
   try {
+    console.log("TESt");
+    console.log(comment);
     dispatch({ type: CommentListAvailableAction.FETCH_COMMENTS_REQUEST });
     const response = await fetch(
       `${API_ENDPOINT}/projects/${projectID}/tasks/${taskID}/comments`,
