@@ -4,6 +4,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTasksDispatch, useTasksState } from "../../context/task/context";
+import { useCommentsDispatch, useCommentsState } from "../../context/comment/context";
 import { updateTask } from "../../context/task/actions";
 
 import { useProjectsState } from "../../context/projects/context";
@@ -11,6 +12,7 @@ import { TaskDetailsPayload } from "../../context/task/types";
 import { Dialog, Transition, Listbox } from "@headlessui/react";
 import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import { useMembersState } from "../../context/members/context";
+import { refreshComments } from "../../context/comment/actions";
 
 type TaskFormUpdatePayload = TaskDetailsPayload & {
     selectedPerson: string;
@@ -43,6 +45,15 @@ const TaskDetails = () => {
     const projectState = useProjectsState();
     const taskListState = useTasksState();
     const taskDispatch = useTasksDispatch();
+
+    //comment State and Dispatch
+    const commentDispatch = useCommentsDispatch();
+    const commentState = useCommentsState();
+    const { commentData } = commentState;
+
+    useEffect(() => {
+        if (projectID && taskID) refreshComments(commentDispatch, projectID, taskID);
+    }, [projectID, commentDispatch, taskID]);
 
     const selectedProject = projectState?.projects.filter(
         (project) => `${project.id}` === projectID
@@ -204,6 +215,17 @@ const TaskDetails = () => {
                                                 Cancel
                                             </button>
                                         </form>
+                                        <div className="mt-2">
+                                            <h3><strong>Comments</strong></h3>
+                                            <div className="mt-2">
+                                                {commentData?.map((comment) => (
+                                                    <p key={comment.id} className="comment">{comment.description}</p>
+                                                ))}
+
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
