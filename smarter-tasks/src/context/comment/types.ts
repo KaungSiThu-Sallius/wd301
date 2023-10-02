@@ -52,6 +52,7 @@ export type CommentDetailsPayload = Omit<CommentDetails, "id">;
 export type CommentDetails = {
   id: number;
   description: string;
+    updated_at: string;
 };
 
 export type CommentData = CommentDetails[];

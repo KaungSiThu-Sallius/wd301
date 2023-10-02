@@ -235,9 +235,13 @@ const TaskDetails = () => {
                                         <div className="mt-2">
                                             <h3><strong>Comments</strong></h3>
                                             <div className="mt-2">
-                                                {commentData?.map((comment) => (
-                                                    <p key={comment.id} className="comment">{comment.description}</p>
-                                                ))}
+                                                {commentData
+                                                    ?.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+                                                    .map((comment) => (
+                                                        <p key={comment.id} className="comment">
+                                                            {comment.description}
+                                                        </p>
+                                                    ))}
                                                 <div className="addCommentSection" id="commentBox">
                                                     <form onSubmit={commentFormSubmit(onSubmit2)}>
                                                         <input
