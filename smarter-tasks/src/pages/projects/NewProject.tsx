@@ -47,6 +47,7 @@ const NewProject = () => {
     return (
         <>
             <button
+                id='newProjectBtn'
                 type="button"
                 onClick={openModal}
                 className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
@@ -92,9 +93,11 @@ const NewProject = () => {
                                             }
                                             <input
                                                 type="text"
+
                                                 placeholder='Enter project name...'
                                                 autoFocus
                                                 {...register('name', { required: true })}
+                                                name="name"
                                                 className={`w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue ${errors.name ? 'border-red-500' : ''
                                                     }`}
                                             />
@@ -102,7 +105,8 @@ const NewProject = () => {
                                             <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                                                 Submit
                                             </button>
-                                            <button type="submit" onClick={closeModal} className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                            <button type="submit" onClick={closeModal}
+                                                id='submitNewProjectBtn' className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                                                 Cancel
                                             </button>
                                         </form>

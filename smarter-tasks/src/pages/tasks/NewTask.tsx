@@ -87,6 +87,7 @@ const NewTask = () => {
                                                 id="title"
                                                 // Register the title field
                                                 {...register("title", { required: true })}
+                                                name="title"
                                                 className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                                             />
                                             <input
@@ -97,6 +98,7 @@ const NewTask = () => {
                                                 id="description"
                                                 // register the description field
                                                 {...register("description", { required: true })}
+                                                name="description"
                                                 className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                                             />
                                             <input
@@ -107,6 +109,7 @@ const NewTask = () => {
                                                 id="dueDate"
                                                 // register due date field
                                                 {...register("dueDate", { required: true })}
+                                                name="dueDate"
                                                 className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                                             />
                                             <button
