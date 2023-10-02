@@ -246,14 +246,14 @@ const TaskDetails = () => {
                                                 {commentData
                                                     ?.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
                                                     .map((comment) => (
-                                                        <p key={comment.id} className="comment">
+                                                        <div key={comment.id} className="comment">
                                                             <span>Name: {comment.User.name}</span>
                                                             <br />
                                                             <span>Comment: {comment.description}</span>
                                                             <br />
                                                             <span>{moment(comment.updatedAt).format('MMMM D, YYYY h:mm A')}</span>
                                                             <br /><br />
-                                                        </p>
+                                                        </div>
                                                     ))}
                                                 <div className="addCommentSection" id="commentBox">
                                                     <form onSubmit={commentFormSubmit(onSubmit2)}>
