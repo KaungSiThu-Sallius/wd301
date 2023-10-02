@@ -110,7 +110,7 @@ const TaskDetails = () => {
             ...data,
             assignee: assignee?.id,
         });
-
+        closeModal();
     };
 
 
@@ -119,7 +119,7 @@ const TaskDetails = () => {
 
             ...data
         });
-        closeModal();
+
     };
 
 
