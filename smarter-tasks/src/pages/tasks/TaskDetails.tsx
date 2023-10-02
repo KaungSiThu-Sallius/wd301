@@ -110,7 +110,7 @@ const TaskDetails = () => {
             ...data,
             assignee: assignee?.id,
         });
-        closeModal();
+
     };
 
 
@@ -242,7 +242,6 @@ const TaskDetails = () => {
                                         <div className="mt-2">
                                             <h3><strong>Comments</strong></h3>
                                             <div className="mt-2">
-
                                                 {commentData
                                                     ?.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
                                                     .map((comment) => (
