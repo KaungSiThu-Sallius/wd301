@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import AccountLayout from "../layouts/account"
-import ProtectedRoute from "./ProtectedRoute"
+import ProtectedRoute from "./ProtectedRoute";
 import Signin from "../pages/signin"
 import Signup from "../pages/signup"
 import Logout from "../pages/logout";
@@ -13,6 +13,7 @@ import ProjectContainer from "../pages/projects/ProjectContainer";
 import ProjectDetails from "../pages/project_details";
 import NewTask from "../pages/tasks/NewTask";
 import TaskDetailsContainer from "../pages/tasks/TaskDetailsContainer";
+import React from "react";
 
 const router = createBrowserRouter([
     { path: "/", element: <Navigate to="/account/projects" replace /> },
